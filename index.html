@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get into Phone - Download the latest modded games and apps.">
+    <title>Modlify.fun - Download Latest Modded Games</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --primary: #00ffcc; /* Updated primary color */
+            --secondary: #00ccff; /* Updated secondary color */
+            --dark: #121212; /* Dark background */
+            --light: #1e1e1e; /* Slightly lighter dark for cards */
+            --white: #ffffff;
+            --text: #e0e0e0; /* Light text for dark mode */
+        }
+
+        body {
+            background: var(--dark);
+            font-size: 16px;
+            color: var(--text);
+        }
+
+        .header {
+            background: var(--light);
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo small {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            color: var(--white);
+            cursor: pointer;
+            display: none; /* Hidden by default */
+        }
+
+        .nav-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links li a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: var(--primary);
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 2.5rem;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            background: var(--dark);
+            color: var(--text);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text);
+        }
+
+        .how-to-download {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .how-to-download .cta-button {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .how-to-download .cta-button:hover {
+            background: var(--secondary);
+        }
+
+        .section {
+            padding: 20px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section-title i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .section-title h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two games per line on mobile */
+            gap: 1rem;
+        }
+
+        .game-card {
+            background: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .game-info {
+            padding: 10px;
+        }
+
+        .game-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        .game-rating {
+            color: #ffc107;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .download-button {
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            transition: background 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .download-button:hover {
+            background: var(--secondary);
+        }
+
+        .not-found {
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 1.2rem;
+            color: var(--text);
+            display: none; /* Hidden by default */
+        }
+
+        .footer {
+            background: var(--light);
+            color: var(--text);
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-links a {
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block; /* Show menu icon on mobile */
+            }
+
+            .nav-links {
+                display: none; /* Hide nav links by default on mobile */
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-links.active {
+                display: flex; /* Show nav links when active */
+            }
+        }
+
+        @media (min-width: 768px) {
+            .game-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid for larger screens */
+            }
+        }
+    </style>
+</head>
+<body>
+ <header class="header">
+        <nav class="nav-container">
+            <div class="nav-top">
+                <div class="logo">
+                    <img src="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png" alt="Modlify.fun Logo" style="height: 40px;">
+                    <span>Modlify.fun</span>
+                    <small>Unlock Premium Mods</small>
+                </div>
+                <div class="menu-icon" id="menuIcon">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+            <div class="nav-bottom">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Popular Apps</a></li>
+                    <li><a href="#">New Releases</a></li>
+                    <li><a href="#">Categories</a></li>
+                </ul>
+                <div class="search-box">
+                    <input type="text" id="search" placeholder="Search for games...">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Latest Games Section -->
+    <section class="section">
+        <div class="section-title">
+            <i class="fas fa-chart-line"></i>
+            <h2>Latest Games</h2>
+        </div>
+        <div class="game-grid" id="gameGrid">
+            <!-- Assetto Corsa Mobile -->
+            <div class="game-card" data-name="Assetto Corsa Mobile">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsv7-mEL1UXJbWJNZMtkffQzMXXZWYoOD8zw&s" alt="Assetto Corsa Mobile">
+                <div class="game-info">
+                    <h3 class="game-title">Assetto Corsa Mobile</h3>
+                    <div class="game-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <button class="download-button" onclick="window.location.href='https://installchecker.com/cl/i/g6evw1';">
+                        <i class="fas fa-cloud-download-alt"></i>
+                        <span>Download</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- GTA 5 Mobile -->
+            <div class="game-card" data-name="GTA 5 Mobile">
+                <img src="https://i.ibb.co/FzQ7s9s/gta5.jpg" alt="GTA 5 Mobile">
+                <div class="game-info">
+                    <h3 class="game-title">GTA 5 Mobile</h3>
+                    <div class="game-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <button class="download-button" onclick="window.location.href='https://installchecker.com/cl/i/x6nx4j';">
+                        <i class="fas fa-cloud-download-alt"></i>
+                        <span>Download</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- BeamNG.drive Mobile -->
+            <div class="game-card" data-name="BeamNG.drive Mobile">
+                <img src="https://i.ibb.co/fXnjPDK/Picsart-25-01-26-13-00-23-859.jpg" alt="BeamNG.drive">
+                <div class="game-info">
+                    <h3 class="game-title">BeamNG.drive Mobile</h3>
+                    <div class="game-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <button class="download-button" onclick="window.location.href='https://installchecker.com/cl/i/lkw61g';">
+                        <i class="fas fa-cloud-download-alt"></i>
+                        <span>Download</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Forza Horizon 5 Mobile -->
+            <div class="game-card" data-name="Forza Horizon 5 Mobile">
+                <img src="https://i.ibb.co/jkMCTy35/Picsart-25-02-02-15-18-45-924.jpg" alt="Forza Horizon 5 Mobile">
+                <div class="game-info">
+                    <h3 class="game-title">Forza Horizon 5 Mobile</h3>
+                    <div class="game-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <button class="download-button" onclick="window.location.href='https://installchecker.com/cl/i/6d4r5j';">
+                        <i class="fas fa-cloud-download-alt"></i>
+                        <span>Download</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Not Found Message -->
+    <div class="not-found" id="notFound">
+        <p>Game Not Found</p>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Popular Apps</a></li>
+                    <li><a href="#">New Releases</a></li>
+                    <li><a href="#">Categories</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Disclaimer</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+                    &copy; 2025 <a href="#">Modlify.fun</a>. All rights reserved. | Designed by <a href="https://www.youtube.com/@Modlify-Games" target="_blank">Modlify Games</a>
+        </div>
+    </footer>
+        </div>
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById('search');
+        const gameGrid = document.getElementById('gameGrid');
+        const notFoundMessage = document.getElementById('notFound');
+        const menuIcon = document.getElementById('menuIcon');
+        const navLinks = document.getElementById('navLinks');
+
+        // Toggle mobile menu
+        menuIcon.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', function () {
+            const filter = this.value.toLowerCase();
+            const games = document.querySelectorAll('.game-card');
+            let found = false;
+
+            games.forEach(game => {
+                const name = game.dataset.name.toLowerCase();
+                const title = game.querySelector('.game-title');
+                if (name.includes(filter)) {
+                    game.style.display = "block";
+                    found = true;
+                    let regex = new RegExp(filter, 'gi');
+                    title.innerHTML = name.replace(regex, match => `<span class="highlight">${match}</span>`);
+                } else {
+                    game.style.display = "none";
+                }
+            });
+
+            // Show "Game Not Found" message if no games match the search
+            if (!found) {
+                notFoundMessage.style.display = "block";
+                gameGrid.style.display = "none";
+            } else {
+                notFoundMessage.style.display = "none";
+                gameGrid.style.display = "grid";
+            }
+        });
+
+        function clearSearch() {
+            searchInput.value = "";
+            searchInput.dispatchEvent(new Event('input'));
+        }
+
+        function triggerContentLocker(button) {
+            alert("Download button clicked! Implement your content locker logic here.");
+        }
+    </script>
+</body>
+</html>
