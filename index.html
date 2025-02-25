@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Get into Phone - Download the latest modded games and apps.">
+    <meta name="keywords" content="modded games, mobile games, modlify.fun, download games, BeamNG.drive, GTA 5 Mobile, Assetto Corsa Mobile">
+    <meta property="og:title" content="Modlify.fun - Download Latest Modded Games">
+    <meta property="og:description" content="Download the latest modded games for mobile. Experience premium mods and exclusive features.">
+    <meta property="og:image" content="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png">
+    <meta property="og:url" content="https://www.modlify.fun">
+    <meta name="twitter:card" content="summary_large_image">
     <title>Modlify.fun - Download Latest Modded Games</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -90,6 +96,13 @@
             list-style: none;
             display: flex;
             gap: 15px;
+            transition: max-height 0.3s ease-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .nav-links.active {
+            max-height: 500px; /* Adjust based on content */
         }
 
         .nav-links li a {
@@ -178,6 +191,7 @@
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
+            cursor: pointer;
         }
 
         .game-card:hover {
@@ -212,19 +226,49 @@
             color: var(--dark);
             border: none;
             padding: 8px 16px;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             width: 100%;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
             font-size: 0.9rem;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .download-button:hover {
             background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .download-button:active {
+            transform: translateY(0);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .see-details-button {
+            background: transparent;
+            color: var(--primary);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        .see-details-button:hover {
+            color: var(--secondary);
         }
 
         .not-found {
@@ -306,6 +350,22 @@
             text-decoration: underline;
         }
 
+        .loader {
+            border: 4px solid var(--light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none; /* Hidden by default */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         @media (max-width: 768px) {
             .menu-icon {
                 display: block; /* Show menu icon on mobile */
@@ -330,7 +390,7 @@
     </style>
 </head>
 <body>
- <header class="header">
+    <header class="header">
         <nav class="nav-container">
             <div class="nav-top">
                 <div class="logo">
@@ -365,8 +425,8 @@
         </div>
         <div class="game-grid" id="gameGrid">
             <!-- Assetto Corsa Mobile -->
-            <div class="game-card" data-name="Assetto Corsa Mobile">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsv7-mEL1UXJbWJNZMtkffQzMXXZWYoOD8zw&s" alt="Assetto Corsa Mobile">
+            <div class="game-card" data-name="Assetto Corsa Mobile" data-link="https://modlify-games.github.io/Assetto-Corsa/">
+                <img src="https://i.ibb.co/d4K4ffzB/assetto-corsa-mobile-2025-02-24-T194631-559.webp" alt="Assetto Corsa Mobile">
                 <div class="game-info">
                     <h3 class="game-title">Assetto Corsa Mobile</h3>
                     <div class="game-rating">
@@ -376,15 +436,18 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
                     </div>
-                    <button class="download-button" onclick="window.location.href='https://installchecker.com/cl/i/g6evw1';">
+                    <button class="download-button" onclick="showContentLocker(event, 'https://installchecker.com/cl/i/g6evw1');">
                         <i class="fas fa-cloud-download-alt"></i>
                         <span>Download</span>
+                    </button>
+                    <button class="see-details-button" onclick="redirectToDetails('https://modlify-games.github.io/Assetto-Corsa/')">
+                        <span>See Details</span>
                     </button>
                 </div>
             </div>
 
             <!-- GTA 5 Mobile -->
-            <div class="game-card" data-name="GTA 5 Mobile">
+            <div class="game-card" data-name="GTA 5 Mobile" data-link="https://modlify-games.github.io/GTA-5/">
                 <img src="https://i.ibb.co/FzQ7s9s/gta5.jpg" alt="GTA 5 Mobile">
                 <div class="game-info">
                     <h3 class="game-title">GTA 5 Mobile</h3>
@@ -395,15 +458,18 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <button class="download-button" onclick="window.location.href='https://installchecker.com/cl/i/x6nx4j';">
+                    <button class="download-button" onclick="showContentLocker(event, 'https://installchecker.com/cl/i/x6nx4j');">
                         <i class="fas fa-cloud-download-alt"></i>
                         <span>Download</span>
+                    </button>
+                    <button class="see-details-button" onclick="redirectToDetails('https://modlify-games.github.io/GTA-5/')">
+                        <span>See Details</span>
                     </button>
                 </div>
             </div>
 
-            <!-- BeamNG.drive Mobile -->
-            <div class="game-card" data-name="BeamNG.drive Mobile">
+   <!-- BeamNG.drive Mobile -->
+            <div class="game-card" data-name="BeamNG.drive Mobile" data-link="https://modlify-games.github.io/BeamNG.drive-Mobile/">
                 <img src="https://i.ibb.co/fXnjPDK/Picsart-25-01-26-13-00-23-859.jpg" alt="BeamNG.drive">
                 <div class="game-info">
                     <h3 class="game-title">BeamNG.drive Mobile</h3>
@@ -414,15 +480,19 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <button class="download-button" onclick="window.location.href='https://installchecker.com/cl/i/lkw61g';">
+                    <button class="download-button" onclick="showContentLocker(event, 'https://installchecker.com/cl/i/lkw61g');">
                         <i class="fas fa-cloud-download-alt"></i>
                         <span>Download</span>
+                    </button>
+                    <button class="see-details-button" onclick="redirectToDetails('https://modlify-games.github.io/BeamNG.drive-Mobile/')">
+                        <span>See Details</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Forza Horizon 5 Mobile -->
-            <div class="game-card" data-name="Forza Horizon 5 Mobile">
+
+             <!-- Forza Horizon 5 Mobile -->
+            <div class="game-card" data-name="Forza Horizon 5 Mobile" data-link="https://modlify-games.github.io/Forza-horizon5/">
                 <img src="https://i.ibb.co/jkMCTy35/Picsart-25-02-02-15-18-45-924.jpg" alt="Forza Horizon 5 Mobile">
                 <div class="game-info">
                     <h3 class="game-title">Forza Horizon 5 Mobile</h3>
@@ -433,9 +503,12 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
                     </div>
-                    <button class="download-button" onclick="window.location.href='https://installchecker.com/cl/i/6d4r5j';">
+                    <button class="download-button" onclick="showContentLocker(event, 'https://installchecker.com/cl/i/6d4r5j');">
                         <i class="fas fa-cloud-download-alt"></i>
                         <span>Download</span>
+                    </button>
+                    <button class="see-details-button" onclick="redirectToDetails('https://modlify-games.github.io/Forza-horizon5/')">
+                        <span>See Details</span>
                     </button>
                 </div>
             </div>
@@ -487,12 +560,11 @@
             </div>
         </div>
         <div class="footer-bottom">
-                    &copy; 2025 <a href="#">Modlify.fun</a>. All rights reserved. | Designed by <a href="https://www.youtube.com/@Modlify-Games" target="_blank">Modlify Games</a>
-        </div>
-    </footer>
+            &copy; 2025 <a href="#">Modlify.fun</a>. All rights reserved. | Designed by <a href="https://www.youtube.com/@Modlify-Games" target="_blank">Modlify Games</a>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
         const searchInput = document.getElementById('search');
         const gameGrid = document.getElementById('gameGrid');
@@ -531,16 +603,22 @@
             } else {
                 notFoundMessage.style.display = "none";
                 gameGrid.style.display = "grid";
-            }
+              }
         });
 
-        function clearSearch() {
-            searchInput.value = "";
-            searchInput.dispatchEvent(new Event('input'));
+        // Redirect to details page
+        function redirectToDetails(url) {
+            window.location.href = url;
         }
-
-        function triggerContentLocker(button) {
-            alert("Download button clicked! Implement your content locker logic here.");
+        // Show loading spinner and redirect
+        function showContentLocker(event, url) {
+            event.stopPropagation(); // Prevent card click event
+            const loader = document.createElement('div');
+            loader.className = 'loader';
+            document.body.appendChild(loader);
+            setTimeout(() => {
+                window.location.href = url;
+            }, 1000); // Simulate loading delay
         }
     </script>
 </body>
