@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4143839749025019"
+     crossorigin="anonymous"></script>
      <link href="favicon.ico" type="image/x-icon" rel="icon" />
    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -388,6 +390,134 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Help Button Styles */
+        .help-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(0, 255, 204, 0.3);
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        .help-button:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 204, 255, 0.4);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 255, 204, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 204, 0); }
+        }
+
+        /* Help Modal Styles */
+        .help-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .help-modal-content {
+            background-color: var(--light);
+            margin: 10% auto;
+            padding: 25px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-help {
+            color: var(--text);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-help:hover {
+            color: var(--primary);
+        }
+
+        .help-content {
+            padding: 20px 0;
+        }
+
+        .help-content h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .help-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .help-content ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .help-content li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .help-content li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .help-cta {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .help-cta:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
         @media (max-width: 768px) {
             .menu-icon {
                 display: block; /* Show menu icon on mobile */
@@ -401,6 +531,20 @@
 
             .nav-links.active {
                 display: flex; /* Show nav links when active */
+            }
+            
+            .help-button {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 20px;
+            }
+            
+            .help-modal-content {
+                width: 90%;
+                margin: 20% auto;
+                padding: 20px;
             }
         }
 
@@ -440,176 +584,6 @@
         </nav>
     </header>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latest Games - Modlify.fun</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        :root {
-            --primary: #00ffcc;
-            --secondary: #00ccff;
-            --dark: #121212;
-            --light: #1e1e1e;
-            --white: #ffffff;
-            --text: #e0e0e0;
-        }
-
-        body {
-            background: var(--dark);
-            font-size: 16px;
-            color: var(--text);
-        }
-
-        .section {
-            padding: 40px 20px;
-        }
-
-        .title-section {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .baps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-        }
-
-        .bav {
-            background: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-            cursor: pointer;
-        }
-
-        .bav:hover {
-            transform: translateY(-5px);
-        }
-
-        .bav a {
-            text-decoration: none;
-            color: var(--text);
-            display: block;
-            padding: 15px;
-        }
-
-        .bloque-imagen img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .title {
-            display: block;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 10px 0 5px;
-            color: var(--text);
-        }
-
-        .version {
-            display: block;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 10px;
-        }
-
-        .px-postmeta {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .box-rating {
-            display: inline-block;
-            position: relative;
-            color: #ffc107; /* Star color */
-        }
-
-        .box-rating .stars {
-            display: inline-block;
-            position: relative;
-        }
-
-        .box-rating .stars i {
-            font-size: 1rem;
-        }
-
-        .box-rating .stars::before {
-            content: "\f005 \f005 \f005 \f005 \f005"; /* Solid stars */
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.2); /* Gray stars for background */
-        }
-
-        .box-rating .stars::after {
-            content: "\f005 \f005 \f005 \f005 \f005"; /* Solid stars */
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            color: #ffc107; /* Yellow stars for rating */
-            position: absolute;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-        }
-
-        .box-rating[data-post-id="75"] .stars::after {
-            width: 92%; /* Rating percentage */
-        }
-
-        .box-rating[data-post-id="68"] .stars::after {
-            width: 98%; /* Rating percentage */
-        }
-
-        .box-rating[data-post-id="55"] .stars::after {
-            width: 96%; /* Rating percentage */
-        }
-
-        .box-rating[data-post-id="46"] .stars::after {
-            width: 100%; /* Rating percentage */
-        }
-
-        .footer {
-            background: var(--light);
-            color: var(--text);
-            padding: 20px;
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .footer-bottom {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        @media (max-width: 768px) {
-            .baps {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            }
-
-            .title {
-                font-size: 1rem;
-            }
-
-            .version {
-                font-size: 0.8rem;
-            }
-        }
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -942,6 +916,41 @@
         </div>
     </footer>
 
+    <!-- Floating Help Button -->
+    <div class="help-button" id="helpButton">
+        <i class="fas fa-question"></i>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="help-modal">
+        <div class="help-modal-content">
+            <span class="close-help">&times;</span>
+            <div class="help-content">
+                <h3>How to Download Games</h3>
+                <p>To access our free downloads, we require users to complete a simple offer. These offers help support our platform and keep it free for everyone.</p>
+                
+                <p>The offers may include:</p>
+                <ul>
+                    <li>Trying an app or game</li>
+                    <li>Completing a short survey</li>
+                    <li>Signing up for a service</li>
+                </ul>
+                
+                <p>All offers are safe and legitimate. Thank you for your support!</p>
+                
+                <p><strong>Download Steps:</strong></p>
+                <ul>
+                    <li>Click on the game you want to download</li>
+                    <li>Complete the simple offer (usually takes less than 1 minute)</li>
+                    <li>Get your download link</li>
+                    <li>Install and enjoy!</li>
+                </ul>
+                
+                <button class="help-cta" id="closeHelpBtn">Got it, thanks!</button>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script>
         const searchInput = document.getElementById('search');
@@ -949,10 +958,38 @@
         const notFoundMessage = document.getElementById('notFound');
         const menuIcon = document.getElementById('menuIcon');
         const navLinks = document.getElementById('navLinks');
+        const helpButton = document.getElementById('helpButton');
+        const helpModal = document.getElementById('helpModal');
+        const closeHelp = document.querySelector('.close-help');
+        const closeHelpBtn = document.getElementById('closeHelpBtn');
 
         // Toggle mobile menu
         menuIcon.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+        });
+
+        // Toggle help modal
+        helpButton.addEventListener('click', () => {
+            helpModal.style.display = 'block';
+            // Stop the pulse animation when clicked
+            helpButton.style.animation = 'none';
+        });
+
+        // Close modal when X is clicked
+        closeHelp.addEventListener('click', () => {
+            helpModal.style.display = 'none';
+        });
+
+        // Close modal when "Got it, thanks" is clicked
+        closeHelpBtn.addEventListener('click', () => {
+            helpModal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (event) => {
+            if (event.target === helpModal) {
+                helpModal.style.display = 'none';
+            }
         });
 
         // Search functionality
@@ -988,6 +1025,7 @@
         function redirectToDetails(url) {
             window.location.href = url;
         }
+        
         // Show loading spinner and redirect
         function showContentLocker(event, url) {
             event.stopPropagation(); // Prevent card click event
@@ -998,6 +1036,26 @@
                 window.location.href = url;
             }, 1000); // Simulate loading delay
         }
+        
+        // Add slight wiggle animation to help button after 10 seconds if not clicked
+        setTimeout(() => {
+            if (!helpButton.clicked) {
+                helpButton.style.animation = 'pulse 2s infinite, wiggle 1s 3';
+            }
+        }, 10000);
+        
+        // Add wiggle animation keyframes
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes wiggle {
+                0% { transform: rotate(0deg); }
+                25% { transform: rotate(5deg); }
+                50% { transform: rotate(-5deg); }
+                75% { transform: rotate(5deg); }
+                100% { transform: rotate(0deg); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
